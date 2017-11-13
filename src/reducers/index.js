@@ -7,5 +7,5 @@ import newStories from './newStoriesReducer';
 export default combineReducers({
     topStories,
     bestStories,
-    newStories
+    newStories,
 });

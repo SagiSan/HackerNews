@@ -22,7 +22,7 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     fetching: false,
                     fetched: true,
-                    stories: action.payload.data
+                    stories: action.payload
                 }
             }
         case 'FETCH_TOPSTORIES_REJECTED':
@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
                 return {
                     ...state,
                     fetching: false,
-                    error: action.payload.message
+                    error: action.payload
                 }
             }
         default:
@@ -41,8 +41,16 @@ export default function reducer(state = initialState, action) {
 }
 
 export function getTopStories() {
-    return {
-        type: "FETCH_TOPSTORIES",
-        payload: axios.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+    return (dispatch) => {
+        axios.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+        .then((res)=>{
+            dispatch({type: 'FETCH_TOPSTORIES_FULFILLED', payload: res.data})
+            /* res.data.map((item)=>{
+                axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
+                .then((res)=>{
+                    console.log(res);
+                })
+            }) */
+        })
     }
 }

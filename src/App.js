@@ -6,6 +6,7 @@ import './App.css';
 import TopStories from './components/TopStories';
 import BestStories from './components/BestStories';
 import NewStories from './components/NewStories';
+import FullStory from './components/FullStory';
 
 import {getTopStories as gtStories} from './reducers/topStoriesReducer';
 import {getBestStories as btStories} from './reducers/bestStoriesReducer';
@@ -15,7 +16,7 @@ import {connect} from 'react-redux';
 
 @connect((store) => {
   return {
-    topStories: store.topStories.stories.data,
+    topStories: store.topStories,
     bestStories: store.bestStories.stories.data,
     newStories: store.newStories.stories.data
   }
@@ -33,7 +34,6 @@ class App extends Component {
   }
 
   componentWillMount() {
-    
   }
 
   getTopStories() {
@@ -67,6 +67,8 @@ class App extends Component {
             </Link>
             <hr/>
             <Route exact path="/" component={TopStories}/>
+            <Route exact path="/top" component={TopStories}/>
+            <Route exact path="/top/:id" component={FullStory}/>
             <Route exact path="/best" component={BestStories}/>
             <Route exact path="/new" component={NewStories}/>
           </div>
