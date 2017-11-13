@@ -7,19 +7,21 @@ import TopStories from './components/TopStories';
 import BestStories from './components/BestStories';
 import NewStories from './components/NewStories';
 
+import {getTopStories} from './reducers/topStoriesReducer';
+import { getBestStories } from './actions/storiesActions';
+
+import {connect} from 'react-redux';
+
+@connect((store)=> {
+  return {
+    topStories: store.topStories
+  }
+})
+
 class App extends Component {
 
-  componentDidMount() {
-    fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', {method: 'get'}).then((res) => {
-      res
-        .json()
-        .then((res) => console.log(res));
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
-
   render() {
+    console.log(this.props.topStories);
     return (
       <div className="App">
         <header className="App-header">
@@ -30,10 +32,10 @@ class App extends Component {
         <Router>
           <div>
             <Link to="/">
-              <button>Top Stories</button>
+              <button onClick={getTopStories}>Top Stories</button>
             </Link>
             <Link to="/best">
-              <button>Best Storie</button>
+              <button>Best Stories</button>
             </Link>
             <Link to="/new">
               <button>New Stories</button>
