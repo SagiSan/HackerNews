@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
+
+@connect((store) => {
+    return {
+      topStories: store.topStories.stories.data,
+    }
+  })
 export default class TopStories extends Component {
 
     constructor() {
@@ -8,17 +15,6 @@ export default class TopStories extends Component {
             
         }
     }
-
-    componentDidMount() {
-        fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', {method: 'get'}).then((res) => {
-            res
-                .json()
-                .then((res) => console.log(res));
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-
     render() {
 
         return (

@@ -7,21 +7,46 @@ import TopStories from './components/TopStories';
 import BestStories from './components/BestStories';
 import NewStories from './components/NewStories';
 
-import {getTopStories} from './reducers/topStoriesReducer';
-import { getBestStories } from './actions/storiesActions';
+import {getTopStories as gtStories} from './reducers/topStoriesReducer';
+import {getBestStories as btStories} from './reducers/bestStoriesReducer';
+import {getNewStories as ntStories} from './reducers/newStoriesReducer';
 
 import {connect} from 'react-redux';
 
-@connect((store)=> {
+@connect((store) => {
   return {
-    topStories: store.topStories
+    topStories: store.topStories.stories.data,
+    bestStories: store.bestStories.stories.data,
+    newStories: store.newStories.stories.data
   }
 })
 
 class App extends Component {
 
+  constructor() {
+    super();
+    this.state = {}
+    this.getTopStories = this.getTopStories.bind(this);
+    this.getBestStories = this.getBestStories.bind(this);
+    this.getNewStories = this.getNewStories.bind(this);
+
+  }
+
+  componentWillMount() {
+    
+  }
+
+  getTopStories() {
+    this.props.dispatch(gtStories());
+  }
+  getBestStories() {
+    this.props.dispatch(btStories());
+  }
+  getNewStories() {
+    this.props.dispatch(ntStories());
+  }
+
   render() {
-    console.log(this.props.topStories);
     return (
       <div className="App">
         <header className="App-header">
@@ -32,13 +57,13 @@ class App extends Component {
         <Router>
           <div>
             <Link to="/">
-              <button onClick={getTopStories}>Top Stories</button>
+              <button onClick={this.getTopStories}>Top Stories</button>
             </Link>
             <Link to="/best">
-              <button>Best Stories</button>
+              <button onClick={this.getBestStories}>Best Stories</button>
             </Link>
             <Link to="/new">
-              <button>New Stories</button>
+              <button onClick={this.getNewStories}>New Stories</button>
             </Link>
             <hr/>
             <Route exact path="/" component={TopStories}/>

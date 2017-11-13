@@ -8,7 +8,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'FETCH_TOPSTORIES_PENDING':
+        case 'FETCH_BESTSTORIES_PENDING':
             {
                 return {
                     ...state,
@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
                     fetching: true
                 }
             }
-        case 'FETCH_TOPSTORIES_FULFILLED':
+        case 'FETCH_BESTSTORIES_FULFILLED':
             {
                 return {
                     ...state,
@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action) {
                     stories: action.payload.data
                 }
             }
-        case 'FETCH_TOPSTORIES_REJECTED':
+        case 'FETCH_BESTSTORIES_REJECTED':
             {
                 return {
                     ...state,
@@ -40,9 +40,9 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-export function getTopStories() {
+export function getBestStories() {
     return {
-        type: "FETCH_TOPSTORIES",
-        payload: axios.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+        type: "FETCH_BESTSTORIES",
+        payload: axios.get('https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty')
     }
 }
