@@ -23,7 +23,7 @@ export default class TopStories extends Component {
         if (topStories.length) {
             stories = topStories.slice(0, storyIndex);
             listOfStories = stories.map((id) => {
-                return <Link to={`/top/:${id}`} key={id}><Story storyId={id}/></Link>
+                return <Link to={`/top/${id}`} key={id}><Story storyId={id}/></Link>
             });
         }
         return (
