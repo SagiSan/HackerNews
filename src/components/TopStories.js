@@ -18,24 +18,27 @@ export default class TopStories extends Component {
       storyIndex: 15
     };
     this.updateStoryIndex = this.updateStoryIndex.bind(this);
+    this.tHandlerScroll = throttle(this.tHandler, 800);
   }
   componentDidMount() {
-    window.addEventListener(
-      "scroll",
-      throttle(() => {
-        let el = this.loader.getBoundingClientRect();
-        if (el.bottom <= window.innerHeight) {
-          if (this.state.storyIndex <= 60) {
-            this.updateStoryIndex();
-          } else {
-              this.loader.style.display = 'none';
-          }
-        }
-      }, 800)
-    );
+    window.addEventListener("scroll", this.tHandlerScroll);
   }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.tHandlerScroll);
+  }
+  tHandler = () => {
+    console.log("test");
+    let el = this.loader.getBoundingClientRect();
+    if (el.bottom <= window.innerHeight) {
+      if (this.state.storyIndex <= 60) {
+        this.updateStoryIndex();
+      } else {
+        this.loader.style.display = "none";
+      }
+    }
+  };
   updateStoryIndex() {
-      console.log('stories updated');
+    console.log("stories updated");
     this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
