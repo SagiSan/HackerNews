@@ -20,7 +20,7 @@ export default class Story extends Component {
     render() {
         const {story} = this.state;
         return (
-            <div>
+            <div className="story">
                 {story && story.title}
             </div>
         )

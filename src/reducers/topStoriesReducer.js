@@ -3,7 +3,8 @@ import axios from 'axios';
 const initialState = {
     fetching: false,
     fetched: false,
-    stories: []
+    storiesID: [],
+    /* storiesData: {} */
 }
 export default function reducer(state = initialState, action) {
 
@@ -22,7 +23,15 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     fetching: false,
                     fetched: true,
-                    stories: action.payload
+                    storiesID: action.payload
+                }
+            }
+        case 'SET_STORIES':
+            return {
+                ...state,
+                storiesData: {
+                    ...state.storiesData,
+                    [action.id]: action.data
                 }
             }
         case 'FETCH_TOPSTORIES_REJECTED':
@@ -45,13 +54,15 @@ export function getTopStories() {
         dispatch({type: 'FETCH_TOPSTORIES_PENDING'});
         axios.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
         .then((res)=>{
-            dispatch({type: 'FETCH_TOPSTORIES_FULFILLED', payload: res.data})
-            /* res.data.map((item)=>{
-                axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
-                .then((res)=>{
-                    console.log(res);
-                })
-            }) */
+            dispatch({type: 'FETCH_TOPSTORIES_FULFILLED', payload: res.data});
+/*              res.data.map((item, index)=>{
+                if(index < 15) {
+                    axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
+                    .then((res)=>{       
+                        dispatch({type: 'SET_STORIES', id: res.data.id, data: res.data});   
+                    }); 
+                }            
+            }) ; */
         })
     }
 }
