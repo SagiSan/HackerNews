@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import Story from "./Story";
 
+import throttle from "lodash.throttle";
+
 @connect(store => {
   return {
     topStoriesID: store.topStories.storiesID
@@ -18,15 +20,22 @@ export default class TopStories extends Component {
     this.updateStoryIndex = this.updateStoryIndex.bind(this);
   }
   componentDidMount() {
-    window.addEventListener("scroll", e => {
-      let el = this.loader.getBoundingClientRect();
-      if (el.bottom <= window.innerHeight) {
-        console.log(el.bottom <= window.innerHeight);
-        this.updateStoryIndex();
-      }
-    });
+    window.addEventListener(
+      "scroll",
+      throttle(() => {
+        let el = this.loader.getBoundingClientRect();
+        if (el.bottom <= window.innerHeight) {
+          if (this.state.storyIndex <= 60) {
+            this.updateStoryIndex();
+          } else {
+              this.loader.style.display = 'none';
+          }
+        }
+      }, 800)
+    );
   }
   updateStoryIndex() {
+      console.log('stories updated');
     this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
