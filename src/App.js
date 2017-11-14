@@ -34,6 +34,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.getTopStories();
   }
 
   getTopStories() {

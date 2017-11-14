@@ -15,6 +15,19 @@ export default class TopStories extends Component {
     this.state = {
       storyIndex: 15
     };
+    this.updateStoryIndex = this.updateStoryIndex.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener("scroll", e => {
+      let el = this.loader.getBoundingClientRect();
+      if (el.bottom <= window.innerHeight) {
+        console.log(el.bottom <= window.innerHeight);
+        this.updateStoryIndex();
+      }
+    });
+  }
+  updateStoryIndex() {
+    this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
     const { topStoriesID } = this.props;
@@ -31,6 +44,17 @@ export default class TopStories extends Component {
         );
       });
     }
-    return <div>{listOfStories}</div>;
+    return (
+      <div>
+        {listOfStories}
+        <div
+          ref={load => {
+            this.loader = load;
+          }}
+        >
+          Loading
+        </div>
+      </div>
+    );
   }
 }
