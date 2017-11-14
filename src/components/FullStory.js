@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class FullStory extends Component {
@@ -9,23 +9,20 @@ export default class FullStory extends Component {
         }
     }
     componentWillMount() {
-        axios
-            .get(`https://hacker-news.firebaseio.com/v0/item/${this.props.match.params.id}.json?print=pretty`)
+        axios.get(`https://hacker-news.firebaseio.com/v0/item/${this.props.match.params.id}.json?print=pretty`)
             .then((res) => {
-                this.setState({story: res.data});
-            })
+                this.setState({ story: res.data });
+            });
     }
     render() {
-        const {story} = this.state;
+        const { story } = this.state;
         console.log(story);
         return (
             <div>
-                {story &&
-                <div>
+                {story && <div>
                     <h3>{story.title}</h3>
                     <span>By {story.by}</span>
-                </div>
-                }
+                </div>}
             </div>
         )
     }

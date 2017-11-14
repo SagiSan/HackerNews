@@ -3,7 +3,7 @@ import axios from 'axios';
 const initialState = {
     fetching: false,
     fetched: false,
-    stories: []
+    storiesID: []
 }
 export default function reducer(state = initialState, action) {
 
@@ -22,7 +22,7 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     fetching: false,
                     fetched: true,
-                    stories: action.payload.data
+                    storiesID: action.payload.data
                 }
             }
         case 'FETCH_BESTSTORIES_REJECTED':

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class Story extends Component {
@@ -10,15 +10,14 @@ export default class Story extends Component {
     }
 
     componentWillMount() {
-        axios
-            .get(`https://hacker-news.firebaseio.com/v0/item/${this.props.storyId}.json?print=pretty`)
+        axios.get(`https://hacker-news.firebaseio.com/v0/item/${this.props.storyId}.json?print=pretty`)
             .then((res) => {
-                this.setState({story: res.data});
-            })
+                this.setState({ story: res.data });
+            });
     }
 
     render() {
-        const {story} = this.state;
+        const { story } = this.state;
         return (
             <div className="story">
                 {story && story.title}

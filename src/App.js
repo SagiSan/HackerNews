@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,17 +8,17 @@ import BestStories from './components/BestStories';
 import NewStories from './components/NewStories';
 import FullStory from './components/FullStory';
 
-import {getTopStories as gtStories} from './reducers/topStoriesReducer';
-import {getBestStories as btStories} from './reducers/bestStoriesReducer';
-import {getNewStories as ntStories} from './reducers/newStoriesReducer';
+import { getTopStories as gtStories } from './reducers/topStoriesReducer';
+import { getBestStories as btStories } from './reducers/bestStoriesReducer';
+import { getNewStories as ntStories } from './reducers/newStoriesReducer';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 @connect((store) => {
   return {
-    topStories: store.topStories,
+    /* topStories: store.topStories,
     bestStories: store.bestStories.stories.data,
-    newStories: store.newStories.stories.data
+    newStories: store.newStories.stories.data */
   }
 })
 
@@ -50,10 +50,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
+          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to HackerNews</h1>
         </header>
-        <hr/>
+        <hr />
         <Router>
           <div>
             <Link to="/">
@@ -65,12 +65,12 @@ class App extends Component {
             <Link to="/new">
               <button onClick={this.getNewStories}>New Stories</button>
             </Link>
-            <hr/>
-            <Route exact path="/" component={TopStories}/>
-            <Route exact path="/top" component={TopStories}/>
-            <Route exact path="/top/:id" component={FullStory}/>
-            <Route exact path="/best" component={BestStories}/>
-            <Route exact path="/new" component={NewStories}/>
+            <hr />
+            <Route exact path="/" component={TopStories} />
+            <Route exact path="/top" component={TopStories} />
+            <Route exact path="/top/:id" component={FullStory} />
+            <Route exact path="/best" component={BestStories} />
+            <Route exact path="/new" component={NewStories} />
           </div>
         </Router>
       </div>
