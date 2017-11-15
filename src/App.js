@@ -63,6 +63,9 @@ class App extends Component {
               <Button onClick={this.getNewStories} content="New Stories" />
             </Link>
             <Divider clearing />
+            <Divider hidden />
+            <Divider hidden />
+            <Divider hidden />
             <Route exact path="/" component={TopStories} />
             <Route exact path="/top" component={TopStories} />
             <Route exact path="/top/:id" component={FullStory} />

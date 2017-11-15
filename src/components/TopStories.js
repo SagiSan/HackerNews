@@ -18,7 +18,7 @@ export default class TopStories extends Component {
       storyIndex: 15
     };
     this.updateStoryIndex = this.updateStoryIndex.bind(this);
-    this.tHandlerScroll = throttle(this.tHandler, 800);
+    this.tHandlerScroll = throttle(this.tHandler, 200);
   }
   componentDidMount() {
     window.addEventListener("scroll", this.tHandlerScroll);
@@ -28,7 +28,7 @@ export default class TopStories extends Component {
   }
   tHandler = () => {
     let el = this.loader.getBoundingClientRect();
-    if (el.bottom <= window.innerHeight) {
+    if (el.bottom -10 <= window.innerHeight) {
       if (this.state.storyIndex <= 60) {
         this.updateStoryIndex();
       } else {
@@ -51,7 +51,7 @@ export default class TopStories extends Component {
           {stories.map(id => {
             return (
               <List.Item key={id}>
-                  <Story storyId={id} />
+                <Story storyId={id} />
               </List.Item>
             );
           })}

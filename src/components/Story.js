@@ -21,8 +21,8 @@ export default class Story extends Component {
   render() {
     const { story } = this.state;
     const { storyId } = this.props;
-    console.log(story);
-    return <div className="story">
+/*     console.log(story);
+ */    return <div className="story">
         <Link to={`/top/${storyId}`}>{story && story.title}</Link>
     </div>;
   }
