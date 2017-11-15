@@ -57,12 +57,17 @@ export default class TopStories extends Component {
     return (
       <div>
         {listOfStories}
-        <div className="loader-holder"
+        <div
+          className="loader-holder"
           ref={load => {
             this.loader = load;
           }}
         >
-        <img className="loader" src="https://i.stack.imgur.com/wD3lC.png" alt="loader" />
+          <img
+            className="loader"
+            src="https://i.stack.imgur.com/wD3lC.png"
+            alt="loader"
+          />
         </div>
       </div>
     );
