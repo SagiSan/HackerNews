@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Container, Loader, List } from "semantic-ui-react";
 
 import Story from "./Story";
 
@@ -46,16 +46,20 @@ export default class TopStories extends Component {
     let listOfStories;
     if (topStoriesID.length) {
       stories = topStoriesID.slice(0, storyIndex);
-      listOfStories = stories.map(id => {
-        return (
-          <Link to={`/top/${id}`} key={id}>
-            <Story storyId={id} />
-          </Link>
-        );
-      });
+      listOfStories = (
+        <List link divided>
+          {stories.map(id => {
+            return (
+              <List.Item key={id}>
+                  <Story storyId={id} />
+              </List.Item>
+            );
+          })}
+        </List>
+      );
     }
     return (
-      <div>
+      <Container textAlign="left">
         {listOfStories}
         <div
           className="loader-holder"
@@ -63,13 +67,9 @@ export default class TopStories extends Component {
             this.loader = load;
           }}
         >
-          <img
-            className="loader"
-            src="https://i.stack.imgur.com/wD3lC.png"
-            alt="loader"
-          />
+          <Loader active inline="centered" content="Loading" />
         </div>
-      </div>
+      </Container>
     );
   }
 }

@@ -38,29 +38,8 @@ a {
 button {
   cursor: pointer;
 }
-.story {
-  margin-bottom: 10px;
-}
-.story:hover {
-  color: red;
-}
 .loader-holder {
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
-}
-.loader {
-  height: 50px;
-  width: 70px;
-  border-radius: 100%;
-  animation: Loader infinite 2s linear;   
-  transform-origin: 50% 50%;
-}
-@keyframes Loader {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

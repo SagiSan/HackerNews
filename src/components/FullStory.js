@@ -16,8 +16,8 @@ export default class FullStory extends Component {
     }
     render() {
         const { story } = this.state;
-        console.log(story);
-        return (
+/*         console.log(story);
+ */        return (
             <div>
                 {story && <div>
                     <h3>{story.title}</h3>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
+import { Button, Header, Container, Divider } from "semantic-ui-react";
 
 import TopStories from "./components/TopStories";
 import BestStories from "./components/BestStories";
@@ -48,27 +49,26 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to HackerNews</h1>
         </header>
-        <hr />
+          <Header as="h3"textAlign="center" color="blue" dividing={true}>Welcome to HackerNews</Header>
         <Router>
-          <div>
+          <Container textAlign="center" fluid>
             <Link to="/">
-              <button onClick={this.getTopStories}>Top Stories</button>
+              <Button onClick={this.getTopStories} content="Top Stories" />
             </Link>
             <Link to="/best">
-              <button onClick={this.getBestStories}>Best Stories</button>
+              <Button onClick={this.getBestStories} content="Best Stories" />
             </Link>
             <Link to="/new">
-              <button onClick={this.getNewStories}>New Stories</button>
+              <Button onClick={this.getNewStories} content="New Stories" />
             </Link>
-            <hr />
+            <Divider clearing />
             <Route exact path="/" component={TopStories} />
             <Route exact path="/top" component={TopStories} />
             <Route exact path="/top/:id" component={FullStory} />
             <Route exact path="/best" component={BestStories} />
             <Route exact path="/new" component={NewStories} />
-          </div>
+          </Container>
         </Router>
       </div>
     );

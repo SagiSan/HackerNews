@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Story extends Component {
   constructor() {
@@ -19,6 +20,10 @@ export default class Story extends Component {
   };
   render() {
     const { story } = this.state;
-    return <div className="story">{story && story.title}</div>;
+    const { storyId } = this.props;
+    console.log(story);
+    return <div className="story">
+        <Link to={`/top/${storyId}`}>{story && story.title}</Link>
+    </div>;
   }
 }
