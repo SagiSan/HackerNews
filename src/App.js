@@ -1,42 +1,38 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import logo from "./logo.svg";
+import "./App.css";
 
-import TopStories from './components/TopStories';
-import BestStories from './components/BestStories';
-import NewStories from './components/NewStories';
-import FullStory from './components/FullStory';
+import TopStories from "./components/TopStories";
+import BestStories from "./components/BestStories";
+import NewStories from "./components/NewStories";
+import FullStory from "./components/FullStory";
 
-import { getTopStories as gtStories } from './reducers/topStoriesReducer';
-import { getBestStories as btStories } from './reducers/bestStoriesReducer';
-import { getNewStories as ntStories } from './reducers/newStoriesReducer';
+import { getTopStories as gtStories } from "./reducers/topStoriesReducer";
+import { getBestStories as btStories } from "./reducers/bestStoriesReducer";
+import { getNewStories as ntStories } from "./reducers/newStoriesReducer";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-@connect((store) => {
+@connect(store => {
   return {
-    /* topStories: store.topStories,
-    bestStories: store.bestStories.stories.data,
-    newStories: store.newStories.stories.data */
-  }
+    /*     topStories: store.topStories,
+    bestStories: store.bestStories,
+    newStories: store.newStories */
+  };
 })
-
 class App extends Component {
-
   constructor() {
     super();
-    this.state = {}
+    this.state = {};
     this.getTopStories = this.getTopStories.bind(this);
     this.getBestStories = this.getBestStories.bind(this);
     this.getNewStories = this.getNewStories.bind(this);
-
   }
 
   componentWillMount() {
     this.getTopStories();
   }
-
   getTopStories() {
     this.props.dispatch(gtStories());
   }

@@ -27,7 +27,6 @@ export default class TopStories extends Component {
     window.removeEventListener("scroll", this.tHandlerScroll);
   }
   tHandler = () => {
-    console.log("test");
     let el = this.loader.getBoundingClientRect();
     if (el.bottom <= window.innerHeight) {
       if (this.state.storyIndex <= 60) {
@@ -38,7 +37,6 @@ export default class TopStories extends Component {
     }
   };
   updateStoryIndex() {
-    console.log("stories updated");
     this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
@@ -59,12 +57,12 @@ export default class TopStories extends Component {
     return (
       <div>
         {listOfStories}
-        <div
+        <div className="loader-holder"
           ref={load => {
             this.loader = load;
           }}
         >
-          Loading
+        <img className="loader" src="https://i.stack.imgur.com/wD3lC.png" alt="loader" />
         </div>
       </div>
     );
