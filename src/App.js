@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button, Header, Container, Divider } from "semantic-ui-react";
+import { Button, Container, Divider, Image } from "semantic-ui-react";
 
 import TopStories from "./components/TopStories";
 import BestStories from "./components/BestStories";
@@ -33,6 +32,8 @@ class App extends Component {
 
   componentWillMount() {
     this.getTopStories();
+    this.getBestStories();
+    this.getNewStories();
   }
   getTopStories() {
     this.props.dispatch(gtStories());
@@ -47,20 +48,30 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-          <Header as="h3"textAlign="center" color="blue" dividing={true}>Welcome to HackerNews</Header>
         <Router>
-          <Container textAlign="center" fluid>
+          <Container textAlign="left" fluid>
+            <Image src="https://news.ycombinator.com/y18.gif" size="mini" height='40' inline spaced='left' />
+            <span className="title"> Hacker News </span>
             <Link to="/">
-              <Button onClick={this.getTopStories} content="Top Stories" />
+              <Button
+                color="orange"
+                onClick={this.getTopStories}
+                content="Top Stories"
+              />
             </Link>
             <Link to="/best">
-              <Button onClick={this.getBestStories} content="Best Stories" />
+              <Button
+                color="orange"
+                onClick={this.getBestStories}
+                content="Best Stories"
+              />
             </Link>
             <Link to="/new">
-              <Button onClick={this.getNewStories} content="New Stories" />
+              <Button
+                color="orange"
+                onClick={this.getNewStories}
+                content="New Stories"
+              />
             </Link>
             <Divider clearing />
             <Divider hidden />

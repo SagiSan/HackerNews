@@ -28,7 +28,7 @@ export default class TopStories extends Component {
   }
   tHandler = () => {
     let el = this.loader.getBoundingClientRect();
-    if (el.bottom -10 <= window.innerHeight) {
+    if (el.bottom - 10 <= window.innerHeight) {
       if (this.state.storyIndex <= 60) {
         this.updateStoryIndex();
       } else {
@@ -47,11 +47,11 @@ export default class TopStories extends Component {
     if (topStoriesID.length) {
       stories = topStoriesID.slice(0, storyIndex);
       listOfStories = (
-        <List link divided>
-          {stories.map(id => {
+        <List link>
+          {stories.map((id, index) => {
             return (
               <List.Item key={id}>
-                <Story storyId={id} />
+                <Story storyId={id} index={index} />
               </List.Item>
             );
           })}

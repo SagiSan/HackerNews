@@ -1,36 +1,10 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  padding-top: 1em;
 }
 /* start */
+.title {
+  color: orange;
+}
 a {
   text-decoration: none;
   color: #222222;
@@ -42,4 +16,36 @@ button {
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
+}
+.story {
+  transition: all 1500ms ease-in-out;
+  border: 1px solid #aaa;
+  padding: 20px 10px;
+  background-color: #fff;
+  box-shadow: 0px 5px 5px -3px #999;
+}
+.story-left{
+  transform: translate(-120%);
+}
+.story-right {
+  transform: translate(120%);
+}
+.story-scale {
+  transition: all 300ms ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+.story-scale:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+.item-header a {
+  color: black !important;
+}
+.user-link {
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+.user-link:hover {
+  color: black;
+  font-size: 1.1em;
 }

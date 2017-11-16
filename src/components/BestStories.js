@@ -48,11 +48,11 @@ export default class BestStories extends Component {
     if (bestStoriesID.length) {
       stories = bestStoriesID.slice(0, storyIndex);
       listOfStories = (
-        <List link divided>
-          {stories.map(id => {
+        <List link>
+          {stories.map((id, index) => {
             return (
               <List.Item key={id}>
-                <Story storyId={id} />
+                <Story storyId={id} index={index} />
               </List.Item>
             );
           })}
