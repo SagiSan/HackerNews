@@ -1,11 +1,12 @@
 import axios from "axios";
+import { List, Map } from "immutable";
 
-const initialState = {
+const initialState = Map({
   fetching: false,
   fetched: false,
   storiesID: []
   /* storiesData: {} */
-};
+});
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case "FETCH_TOPSTORIES_PENDING": {

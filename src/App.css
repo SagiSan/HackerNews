@@ -18,7 +18,7 @@ button {
   left: 50%;
 }
 .story {
-  transition: all 1500ms ease-in-out;
+  transition: all 800ms ease-in-out;
   border: 1px solid #aaa;
   padding: 20px 10px;
   background-color: #fff;

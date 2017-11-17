@@ -37,7 +37,9 @@ export default class TopStories extends Component {
     }
   };
   updateStoryIndex() {
-    this.setState({ storyIndex: this.state.storyIndex + 15 });
+    this.setState({ storyIndex: this.state.storyIndex + 15 }, () =>
+      console.log(this.state.storyIndex)
+    );
   }
   render() {
     const { topStoriesID } = this.props;

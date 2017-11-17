@@ -31,7 +31,7 @@ export default class Story extends Component {
   render() {
     const { story } = this.state;
     const { storyId, index } = this.props;
-    const isEven = index % 2 === 0 ? "story-left" : "story-right";
+    const isEven = story && index % 2 === 0 ? "story-left" : "story-right";
     return (
       <div className="story-scale">
         <div className={`story ${isEven}`} style={this.state.storyAnimate}>
