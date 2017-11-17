@@ -20,9 +20,9 @@ export default function reducer(state = initialState, action) {
 
     case "FETCH_TOPSTORIES_FULFILLED":
       return state
-        .set("storiesID", List(action.payload))
+        .set("fetching", false)
         .set("fetched", true)
-        .set("fetching", false);
+        .set("storiesID", List(action.payload));
     /*     case "SET_STORIES":
       return {
         ...state,

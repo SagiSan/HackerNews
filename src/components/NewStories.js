@@ -8,7 +8,7 @@ import throttle from "lodash.throttle";
 
 @connect(store => {
   return {
-    newStoriesID: store.newStories.storiesID
+    newStoriesID: store.newStories.get('storiesID')
   };
 })
 export default class NewStories extends Component {
@@ -45,7 +45,7 @@ export default class NewStories extends Component {
     const { storyIndex } = this.state;
     let stories;
     let listOfStories;
-    if (newStoriesID.length) {
+    if (newStoriesID.size) {
       stories = newStoriesID.slice(0, storyIndex);
       listOfStories = (
         <List link>
