@@ -4,7 +4,8 @@ import { List, Map } from "immutable";
 const initialState = Map({
   fetching: false,
   fetched: false,
-  storiesID: List([])
+  storiesID: List([]),
+  error: Map({})
   /* storiesData: {} */
 });
 export default function reducer(state = initialState, action) {
@@ -22,21 +23,16 @@ export default function reducer(state = initialState, action) {
         .set("storiesID", List(action.payload))
         .set("fetched", true)
         .set("fetching", false);
-    case "SET_STORIES":
+    /*     case "SET_STORIES":
       return {
         ...state,
         storiesData: {
           ...state.storiesData,
           [action.id]: action.data
         }
-      };
+      }; */
     case "FETCH_TOPSTORIES_REJECTED":
-      return state.push(
-        Map({
-          fetching: false,
-          error: action.payload
-        })
-      );
+      return state.set("error", Map(action.payload)).set("fetching", false);
 
     default:
       return state;
