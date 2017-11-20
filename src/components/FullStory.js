@@ -6,7 +6,8 @@ export default class FullStory extends Component {
   constructor() {
     super();
     this.state = {
-      story: {}
+      story: {},
+      kids: []
     };
   }
   componentWillMount() {
@@ -17,9 +18,22 @@ export default class FullStory extends Component {
       )
       .then(res => {
         this.setState({ story: res.data });
+        res.data.kids.map(id => {
+          axios
+            .get(
+              `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+            )
+            .then(res => {
+              this.state.kids.push(res.data);
+            });
+        });
+      })
+      .then(() => {
+        this.setState({ kids: this.state.kids });
       });
   }
   render() {
+    console.log(this.state.kids);
     const { story } = this.state;
     return (
       <div>
@@ -49,20 +63,42 @@ export default class FullStory extends Component {
         <Divider hidden />
         <Divider hidden />
         <Container textAlign="left">
-        <Comment.Group>
-        <Comment>
-          <Comment.Content>
-            <Comment.Author as="a">Matt</Comment.Author>
-            <Comment.Metadata>
-              <div>Today at 5:42PM</div>
-            </Comment.Metadata>
-            <Comment.Text>How artistic!</Comment.Text>
-            <Comment.Actions>
-              <Comment.Action>Reply</Comment.Action>
-            </Comment.Actions>
-          </Comment.Content>
-        </Comment>
-        </Comment.Group>
+          <Comment.Group>
+            <Comment>
+              <Comment.Avatar src="/avatar-icon.png" />
+              <Comment.Content>
+                <Comment.Author as="a">Elliot Fu</Comment.Author>
+                <Comment.Metadata>
+                  <div>Yesterday at 12:30AM</div>
+                </Comment.Metadata>
+                <Comment.Text>
+                  <p>
+                    This has been very useful for my research. Thanks as well!
+                  </p>
+                </Comment.Text>
+                <Comment.Actions>
+                  <Comment.Action>Reply</Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+              <Comment.Group>
+                <Comment>
+                  <Comment.Avatar src="/avatar-icon.png" />
+                  <Comment.Content>
+                    <Comment.Author as="a">Jenny Hess</Comment.Author>
+                    <Comment.Metadata>
+                      <div>Just now</div>
+                    </Comment.Metadata>
+                    <Comment.Text>
+                      Elliot you are always so right :)
+                    </Comment.Text>
+                    <Comment.Actions>
+                      <Comment.Action>Reply</Comment.Action>
+                    </Comment.Actions>
+                  </Comment.Content>
+                </Comment>
+              </Comment.Group>
+            </Comment>
+          </Comment.Group>
         </Container>
       </div>
     );
