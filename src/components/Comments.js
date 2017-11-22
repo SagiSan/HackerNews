@@ -6,7 +6,7 @@ export default class Comments extends Component {
 
   render() {
     return (
-      <div className="comment">
+      <div>
         <SingleComment id={this.props.id} />
       </div>
     );

@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Item, Header, Divider, Comment } from "semantic-ui-react";
+import {
+  Container,
+  Item,
+  Header,
+  Divider,
+  Comment,
+  Loader
+} from "semantic-ui-react";
+import throttle from "lodash.throttle";
 
 import SingleComment from "./SingleComment";
 
@@ -8,8 +16,10 @@ export default class FullStory extends Component {
   constructor() {
     super();
     this.state = {
-      story: {}
+      story: {},
+      commentIndex: 15,
     };
+    this.tHandlerScroll = throttle(this.tHandler, 200);
   }
   componentWillMount() {
     axios
@@ -22,12 +32,33 @@ export default class FullStory extends Component {
         this.setState({ story: res.data });
       });
   }
+  componentDidMount() {
+    window.addEventListener("scroll", this.tHandlerScroll);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.tHandlerScroll);
+  }
+  tHandler = () => {
+    let el = this.loader.getBoundingClientRect();
+    if (el.bottom - 10 <= window.innerHeight) {
+      if (this.state.commentIndex <= this.state.story.descendants) {
+        console.log("load");
+        this.updateCommentIndex();
+      } else {
+        this.loader.style.display = "none";
+      }
+    }
+  };
+  updateCommentIndex = () => {
+    this.setState({ commentIndex: this.state.commentIndex + 15 });
+  };
   render() {
-    const { story } = this.state;
-    const comments =
-      story.kids &&
-      story.kids.map(id => {
-        return <SingleComment key={id} id={id} />;
+    const { story, commentIndex } = this.state;
+    const comments = story.kids && story.kids.slice(0, commentIndex);
+    const listOfComments =
+      comments &&
+      comments.map((id,index) => {
+        return <SingleComment className key={id} id={id} index={index} />;
       });
     return (
       <div>
@@ -57,8 +88,16 @@ export default class FullStory extends Component {
             <Divider hidden />
             <Divider hidden />
             <Container textAlign="left">
-              <Comment.Group>{comments}</Comment.Group>
+              <Comment.Group>{listOfComments}</Comment.Group>
             </Container>
+            <div
+              className="loader-holder"
+              ref={load => {
+                this.loader = load;
+              }}
+            >
+              <Loader active inline="centered" content="Loading" />
+            </div>
           </div>
         )}
       </div>

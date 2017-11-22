@@ -10,10 +10,11 @@ export default class SingleComment extends Component {
     super();
     this.state = {
       collapsed: true,
-      comment: {}
+      comment: {},
+      storyAnimate: {}
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     axios
       .get(
         `https://hacker-news.firebaseio.com/v0/item/${
@@ -21,17 +22,21 @@ export default class SingleComment extends Component {
         }.json?print=pretty`
       )
       .then(res => {
-        this.setState({ comment: res.data });
+        this.setState({
+          comment: res.data,
+          storyAnimate: { transform: "translate(0)" }
+        });
       });
   }
   handleMore = () => {
     this.setState({ collapsed: !this.state.collapsed });
   };
   render() {
-    const { comment, collapsed } = this.state;
-    //comment node
+    const { comment, collapsed, storyAnimate } = this.state;
+    const { index } = this.props;
+    const isEven = comment && index % 2 === 0 ? "story-left" : "story-right";
     return (
-      <div className="comment">
+      <div className={`comment ${isEven}`} style={storyAnimate}>
         <Comment>
           <Comment.Avatar src="/avatar-icon.png" />
           <Comment.Content>

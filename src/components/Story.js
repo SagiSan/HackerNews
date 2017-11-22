@@ -24,7 +24,7 @@ export default class Story extends Component {
       .then(res => {
         this.setState({
           story: res.data,
-          storyAnimate: { transform: "translateX(0)" }
+          storyAnimate: { transform: "translate(0)" }
         });
       });
   };
