@@ -41,7 +41,9 @@ export default class SingleComment extends Component {
                 <Timestamp time={comment.time} />
               </div>
             </Comment.Metadata>
-            <Comment.Text>{comment.text}</Comment.Text>
+            <Comment.Text>
+              <div dangerouslySetInnerHTML={{ __html: comment.text }} />
+            </Comment.Text>
             <Comment.Actions>
               <Comment.Action>Reply</Comment.Action>
               {comment.kids && (
