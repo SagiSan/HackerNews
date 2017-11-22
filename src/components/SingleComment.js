@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-/* import { Link } from "react-router-dom";
- */ import {
-  Header,
-  Comment
-} from "semantic-ui-react";
+import { Comment } from "semantic-ui-react";
 import Timestamp from "react-timestamp";
 
 import Comments from "./Comments";
