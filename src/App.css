@@ -52,3 +52,9 @@ button {
   color: black;
   font-size: 1.1em;
 }
+.favourites {
+  text-align: right;
+}
+.star {
+  cursor: pointer;
+}

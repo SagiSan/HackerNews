@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Comment } from "semantic-ui-react";
+import { Comment, Divider } from "semantic-ui-react";
 import Timestamp from "react-timestamp";
 
 import Comments from "./Comments";
@@ -65,6 +65,7 @@ export default class SingleComment extends Component {
               })}
             </Comment.Group>
           )}
+          <Divider hidden />
         </Comment>
         {/*        <Comment.Group>
           <Comment>

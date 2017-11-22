@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Item } from "semantic-ui-react";
+import { Item, Icon } from "semantic-ui-react";
 
 export default class Story extends Component {
   constructor() {
     super();
     this.state = {
       story: {},
-      storyAnimate: {}
+      storyAnimate: {},
+      star: "empty star"
     };
   }
 
@@ -18,8 +19,9 @@ export default class Story extends Component {
   getStory = () => {
     axios
       .get(
-        `https://hacker-news.firebaseio.com/v0/item/${this.props
-          .storyId}.json?print=pretty`
+        `https://hacker-news.firebaseio.com/v0/item/${
+          this.props.storyId
+        }.json?print=pretty`
       )
       .then(res => {
         this.setState({
@@ -29,7 +31,7 @@ export default class Story extends Component {
       });
   };
   render() {
-    const { story } = this.state;
+    const { story, star } = this.state;
     const { storyId, index } = this.props;
     const isEven = story && index % 2 === 0 ? "story-left" : "story-right";
     return (
@@ -47,6 +49,18 @@ export default class Story extends Component {
               </Item.Meta>
             </Item.Content>
           </Item>
+          <div className="favourites">
+            <Icon
+              onClick={() =>
+                this.setState({
+                  star: this.state.star === "star" ? "empty star" : "star"
+                })
+              }
+              className="star"
+              name={star}
+              size="large"
+            />
+          </div>
         </div>
       </div>
     );

@@ -42,7 +42,6 @@ export default class FullStory extends Component {
     let el = this.loader.getBoundingClientRect();
     if (el.bottom - 10 <= window.innerHeight) {
       if (this.state.commentIndex <= this.state.story.descendants) {
-        console.log("load");
         this.updateCommentIndex();
       } else {
         this.loader.style.display = "none";
