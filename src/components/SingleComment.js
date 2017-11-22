@@ -58,7 +58,7 @@ export default class SingleComment extends Component {
           {comment.kids && (
             <Comment.Group collapsed={collapsed}>
               {comment.kids.map(id => {
-                <Comments id={id} />;
+                return <Comments key={id} id={id} />;
               })}
             </Comment.Group>
           )}
