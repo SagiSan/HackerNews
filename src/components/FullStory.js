@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Item, Header, Comment, Divider } from "semantic-ui-react";
+import { Container, Item, Header, Divider, Comment } from "semantic-ui-react";
 
-import Comments from "./Comments";
+import SingleComment from "./SingleComment";
 
 export default class FullStory extends Component {
   constructor() {
@@ -14,8 +14,9 @@ export default class FullStory extends Component {
   componentWillMount() {
     axios
       .get(
-        `https://hacker-news.firebaseio.com/v0/item/${this.props.match.params
-          .id}.json?print=pretty`
+        `https://hacker-news.firebaseio.com/v0/item/${
+          this.props.match.params.id
+        }.json?print=pretty`
       )
       .then(res => {
         this.setState({ story: res.data });
@@ -23,11 +24,10 @@ export default class FullStory extends Component {
   }
   render() {
     const { story } = this.state;
-    console.log(story);
     const comments =
       story.kids &&
       story.kids.map(id => {
-        return <Comments key={id} id={id} />;
+        return <SingleComment key={id} id={id} />;
       });
     return (
       <div>
@@ -57,7 +57,7 @@ export default class FullStory extends Component {
             <Divider hidden />
             <Divider hidden />
             <Container textAlign="left">
-              {comments}
+              <Comment.Group>{comments}</Comment.Group>
             </Container>
           </div>
         )}
