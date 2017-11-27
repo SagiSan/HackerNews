@@ -8,7 +8,8 @@ import throttle from "lodash.throttle";
 
 @connect(store => {
   return {
-    topStoriesID: store.topStories.get("storiesID")
+    topStoriesID: store.topStories.get("storiesID"),
+    favs: store.favourites.get("favourites")
   };
 })
 export default class TopStories extends Component {
@@ -40,6 +41,7 @@ export default class TopStories extends Component {
     this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
+    console.log(this.props.favs.size);
     const { topStoriesID } = this.props;
     const { storyIndex } = this.state;
     let stories;

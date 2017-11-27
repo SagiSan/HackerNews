@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Item, Icon } from "semantic-ui-react";
 
+import { addFavourite } from "../reducers/favouritesReducer";
+import { removeFavourite } from "../reducers/favouritesReducer";
+
+@connect(store => {
+  return {
+    /* favs: store.favourites.get("favourites") */
+  };
+})
 export default class Story extends Component {
   constructor() {
     super();
@@ -30,6 +39,16 @@ export default class Story extends Component {
         });
       });
   };
+  favouriteHandler = () => {
+    if (this.state.star === "empty star") {
+      this.props.dispatch(addFavourite(this.state.story));
+    } else {
+      this.props.dispatch(removeFavourite(this.state.story));
+    }
+    this.setState({
+      star: this.state.star === "star" ? "empty star" : "star"
+    });
+  };
   render() {
     const { story, star } = this.state;
     const { storyId, index } = this.props;
@@ -51,11 +70,7 @@ export default class Story extends Component {
           </Item>
           <div className="favourites">
             <Icon
-              onClick={() =>
-                this.setState({
-                  star: this.state.star === "star" ? "empty star" : "star"
-                })
-              }
+              onClick={this.favouriteHandler}
               className="star"
               name={star}
               size="large"
