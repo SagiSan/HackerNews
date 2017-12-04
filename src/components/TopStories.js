@@ -41,7 +41,6 @@ export default class TopStories extends Component {
     this.setState({ storyIndex: this.state.storyIndex + 15 });
   }
   render() {
-    console.log(this.props.favs.size);
     const { topStoriesID } = this.props;
     const { storyIndex } = this.state;
     let stories;
