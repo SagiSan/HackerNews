@@ -11,14 +11,18 @@ import FullStory from "./components/FullStory";
 import { getTopStories as gtStories } from "./reducers/topStoriesReducer";
 import { getBestStories as btStories } from "./reducers/bestStoriesReducer";
 import { getNewStories as ntStories } from "./reducers/newStoriesReducer";
+import { addFavFromStorage as ffs } from "./reducers/favouritesReducer";
 
 import { connect } from "react-redux";
+
+import * as localforage from "localforage";
 
 @connect(store => {
   return {
     /*     topStories: store.topStories,
     bestStories: store.bestStories,
     newStories: store.newStories */
+    favs: store.favourites.get("favourites")
   };
 })
 class App extends Component {
@@ -31,6 +35,16 @@ class App extends Component {
   }
 
   componentWillMount() {
+    /*     localforage.setItem("favs", [
+      { id: "brasno" },
+      { id: "brasno2" },
+      { id: "brasno3" }
+    ]); */
+    localforage.getItem("favourites").then(favs => {
+      if (favs) {
+        this.props.dispatch(ffs(favs));
+      }
+    });
     this.getTopStories();
     this.getBestStories();
     this.getNewStories();
@@ -50,7 +64,13 @@ class App extends Component {
       <div className="App">
         <Router>
           <Container textAlign="left" fluid>
-            <Image src="https://news.ycombinator.com/y18.gif" size="mini" height='40' inline spaced='left' />
+            <Image
+              src="https://news.ycombinator.com/y18.gif"
+              size="mini"
+              height="40"
+              inline
+              spaced="left"
+            />
             <span className="title"> Hacker News </span>
             <Link to="/">
               <Button
