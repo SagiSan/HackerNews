@@ -40,11 +40,11 @@ class App extends Component {
       { id: "brasno2" },
       { id: "brasno3" }
     ]); */
-/*     localforage.getItem("favourites").then(favs => {
+    localforage.getItem("favourites").then(favs => {
       if (favs) {
         this.props.dispatch(ffs(favs));
       }
-    }); */
+    });
     this.getTopStories();
     this.getBestStories();
     this.getNewStories();

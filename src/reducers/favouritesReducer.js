@@ -20,7 +20,6 @@ export default function reducer(state = initialState, action) {
     case "FETCH_FAVOURITES_FULFILLED":
       localforage.getItem("favourites").then(item => {
         let obj = { ...item };
-        console.log(obj);
         obj[action.payload.id] = action.payload;
         localforage.setItem("favourites", obj);
       });
@@ -32,16 +31,15 @@ export default function reducer(state = initialState, action) {
           state.get("favourites").set(action.payload.id, action.payload)
         );
     case "REMOVE_FAVOURITES_FULFILLED":
-      /*       localforage.setItem("favourites", [
-        ...state.get("favourites").filterNot(item => {
-          return item.id === action.payload.id;
-        })
-      ]); */
-      /*         .then(v => {
-          if (!v.length) {
+      localforage.getItem("favourites").then(item => {
+        let obj = { ...item };
+        delete obj[action.payload.id];
+        localforage.setItem("favourites", obj).then(item => {
+          if (!item.length) {
             localforage.removeItem("favourites");
           }
-        }); */
+        });
+      });
       return state
         .set("fetching", false)
         .set("fetched", true)

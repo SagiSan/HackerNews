@@ -10,7 +10,7 @@ import * as localforage from "localforage";
 
 @connect(store => {
   return {
-    /* favs: store.favourites.get("favourites") */
+    favs: store.favourites.get("favourites")
   };
 })
 export default class Story extends Component {
@@ -23,6 +23,11 @@ export default class Story extends Component {
     };
   }
 
+  componentWillMount() {
+    if (this.props.favs.get(`${this.props.storyId}`)) {
+      this.setState({ star: "star" });
+    }
+  }
   componentDidMount() {
     this.getStory();
   }
@@ -43,14 +48,6 @@ export default class Story extends Component {
   favouriteHandler = () => {
     if (this.state.star === "empty star") {
       this.props.dispatch(addFavourite(this.state.story));
-/*       localforage.getItem("favourites").then(items => {
-        console.log("get item");
-        if (items !== null) {
-          localforage.setItem("favourites", [...items, this.state.story]);
-        } else {
-          localforage.setItem("favourites", [this.state.story]);
-        }
-      }); */
     } else {
       this.props.dispatch(removeFavourite(this.state.story));
     }
