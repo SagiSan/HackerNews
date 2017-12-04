@@ -18,9 +18,11 @@ export default function reducer(state = initialState, action) {
         .set("fetched", true)
         .set("favourites", Map(action.payload));
     case "FETCH_FAVOURITES_FULFILLED":
-      localforage.setItem("favourites", {
-        /*         ...state.get("favourites"),
-        action.payload */
+      localforage.getItem("favourites").then(item => {
+        let obj = { ...item };
+        console.log(obj);
+        obj[action.payload.id] = action.payload;
+        localforage.setItem("favourites", obj);
       });
       return state
         .set("fetching", false)
