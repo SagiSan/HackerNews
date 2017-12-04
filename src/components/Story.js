@@ -43,14 +43,14 @@ export default class Story extends Component {
   favouriteHandler = () => {
     if (this.state.star === "empty star") {
       this.props.dispatch(addFavourite(this.state.story));
-      localforage.getItem("favourites").then(items => {
+/*       localforage.getItem("favourites").then(items => {
         console.log("get item");
         if (items !== null) {
           localforage.setItem("favourites", [...items, this.state.story]);
         } else {
           localforage.setItem("favourites", [this.state.story]);
         }
-      });
+      }); */
     } else {
       this.props.dispatch(removeFavourite(this.state.story));
     }

@@ -5,7 +5,7 @@ import * as localforage from "localforage";
 const initialState = Map({
   fetching: false,
   fetched: false,
-  favourites: List([]),
+  favourites: Map({}),
   error: Map({})
 });
 export default function reducer(state = initialState, action) {
@@ -16,37 +16,34 @@ export default function reducer(state = initialState, action) {
       return state
         .set("fetching", false)
         .set("fetched", true)
-        .set("favourites", List(action.payload));
+        .set("favourites", Map(action.payload));
     case "FETCH_FAVOURITES_FULFILLED":
-      localforage.setItem("favourites", [
-        ...state.get("favourites"),
-        action.payload
-      ]);
-      return state
-        .set("fetching", false)
-        .set("fetched", true)
-        .set("favourites", state.get("favourites").push(action.payload));
-    case "REMOVE_FAVOURITES_FULFILLED":
-      localforage
-        .setItem("favourites", [
-          ...state.get("favourites").filterNot(item => {
-            return item.id === action.payload.id;
-          })
-        ])
-        .then(v => {
-          if (!v.length) {
-            localforage.removeItem("favourites");
-          }
-        });
+      localforage.setItem("favourites", {
+        /*         ...state.get("favourites"),
+        action.payload */
+      });
       return state
         .set("fetching", false)
         .set("fetched", true)
         .set(
           "favourites",
-          state.get("favourites").filterNot(item => {
-            return item.id === action.payload.id;
-          })
+          state.get("favourites").set(action.payload.id, action.payload)
         );
+    case "REMOVE_FAVOURITES_FULFILLED":
+      /*       localforage.setItem("favourites", [
+        ...state.get("favourites").filterNot(item => {
+          return item.id === action.payload.id;
+        })
+      ]); */
+      /*         .then(v => {
+          if (!v.length) {
+            localforage.removeItem("favourites");
+          }
+        }); */
+      return state
+        .set("fetching", false)
+        .set("fetched", true)
+        .set("favourites", state.get("favourites").remove(action.payload.id));
     case "FETCH_FAVOURITES_REJECTED":
       return state.set("fetching", false).set("error", Map(action.payload));
     default:
