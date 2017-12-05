@@ -6,6 +6,7 @@ import { Button, Container, Divider, Image } from "semantic-ui-react";
 import TopStories from "./components/TopStories";
 import BestStories from "./components/BestStories";
 import NewStories from "./components/NewStories";
+import Favourites from "./components/Favourites";
 import FullStory from "./components/FullStory";
 
 import { getTopStories as gtStories } from "./reducers/topStoriesReducer";
@@ -93,6 +94,13 @@ class App extends Component {
                 content="New Stories"
               />
             </Link>
+            <Link to="/favourites">
+              <Button
+                color="orange"
+                onClick={this.getNewStories}
+                content="Favourites"
+              />
+            </Link>
             <Divider clearing />
             <Divider hidden />
             <Divider hidden />
@@ -102,6 +110,7 @@ class App extends Component {
             <Route exact path="/top/:id" component={FullStory} />
             <Route exact path="/best" component={BestStories} />
             <Route exact path="/new" component={NewStories} />
+            <Route exact path="/favourites" component={Favourites} />
           </Container>
         </Router>
       </div>

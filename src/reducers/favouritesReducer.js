@@ -20,7 +20,10 @@ export default function reducer(state = initialState, action) {
     case "FETCH_FAVOURITES_FULFILLED":
       localforage.getItem("favourites").then(item => {
         let obj = { ...item };
-        obj[action.payload.id] = action.payload;
+        obj[action.payload.id] = {
+          ...action.payload,
+          timestamp: new Date().getTime()
+        };
         localforage.setItem("favourites", obj);
       });
       return state
