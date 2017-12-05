@@ -45,6 +45,10 @@ button {
 .item-header a {
   color: black !important;
 }
+.fav-title {
+  color: black !important;
+  font-weight: 700;
+}
 .user-link {
   color: rgba(0, 0, 0, 0.4) !important;
 }

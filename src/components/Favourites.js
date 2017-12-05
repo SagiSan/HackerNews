@@ -72,7 +72,7 @@ export default class Favourites extends Component {
                   <Item.Content>
                     <Item.Header className="item-header">
                       <Link to={`/top/${story.id}`}>
-                        <div
+                        <div className="fav-title"
                           dangerouslySetInnerHTML={{
                             __html: story.title
                           }}
