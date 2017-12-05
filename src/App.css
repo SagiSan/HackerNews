@@ -27,7 +27,7 @@ button {
 .comment {
   transition: all 800ms ease-in-out;
 }
-.story-left{
+.story-left {
   transform: translate(-120%);
 }
 .story-right {
@@ -61,4 +61,17 @@ button {
 }
 .star {
   cursor: pointer;
+}
+.hide {
+  cursor: pointer;
+}
+.unhide {
+  cursor: pointer;
+}
+.red-cross {
+  color: red;
+  text-decoration: line-through;
+}
+.green-new {
+  color: green;
 }

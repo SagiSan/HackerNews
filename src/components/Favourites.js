@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Loader, Item, Divider } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import Timestamp from "react-timestamp";
+import { Container, Loader } from "semantic-ui-react";
+import FavStory from "./FavStory";
 
 import throttle from "lodash.throttle";
 
@@ -19,7 +18,7 @@ export default class Favourites extends Component {
     super();
     this.state = {
       storyIndex: 15,
-      storyAnimate: { transform: "translate(0)" }
+      storyAnimate: { transform: "translate(0)" },
     };
     this.updateStoryIndex = this.updateStoryIndex.bind(this);
     this.tHandlerScroll = throttle(this.tHandler, 200);
@@ -60,43 +59,12 @@ export default class Favourites extends Component {
     }
     return (
       <Container textAlign="left">
-        {stories && stories.valueSeq().map((story, index) => (
-          <div key={story.id}>
-            <div className="story-scale">
-              <div
-                className={`story ${
-                  index % 2 === 0 ? "story-left" : "story-right"
-                }`}
-                style={this.state.storyAnimate}
-              >
-                <Item>
-                  <Item.Content>
-                    <Item.Header className="item-header">
-                      <Link to={`/top/${story.id}`}>
-                        <div
-                          className="fav-title"
-                          dangerouslySetInnerHTML={{
-                            __html: story.title
-                          }}
-                        />
-                      </Link>
-                    </Item.Header>
-                    <Item.Meta>
-                      <span>{story.score} points </span>
-                      <span>by {story.by}</span>
-                      <span> | {story.descendants} comments | </span>
-                      <span>
-                        {" "}
-                        <Timestamp time={story.timestamp / 1000} />
-                      </span>
-                    </Item.Meta>
-                  </Item.Content>
-                </Item>
-              </div>
+        {stories &&
+          stories.valueSeq().map((story, index) => (
+            <div key={story.id}>
+              <FavStory locStory={story} index={index} />
             </div>
-            <Divider hidden />
-          </div>
-        ))}
+          ))}
         <div
           className="loader-holder"
           ref={load => {
