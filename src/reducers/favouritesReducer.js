@@ -1,5 +1,5 @@
 /* import axios from "axios";
- */ import { List, Map } from "immutable";
+ */ import { Map } from "immutable";
 import * as localforage from "localforage";
 
 const initialState = Map({

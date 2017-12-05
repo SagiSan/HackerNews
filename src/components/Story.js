@@ -6,8 +6,6 @@ import { Item, Icon } from "semantic-ui-react";
 
 import { addFavourite, removeFavourite } from "../reducers/favouritesReducer";
 
-import * as localforage from "localforage";
-
 @connect(store => {
   return {
     favs: store.favourites.get("favourites")
@@ -65,7 +63,11 @@ export default class Story extends Component {
           <Item>
             <Item.Content>
               <Item.Header className="item-header">
-                <Link to={`/top/${storyId}`}>{story && story.title}</Link>
+                <Link to={`/top/${storyId}`}>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: story && story.title }}
+                  />
+                </Link>
               </Item.Header>
               <Item.Meta>
                 <span>{story.score} points </span>
